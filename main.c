@@ -46,6 +46,6 @@ void SysTick_Handler(void)
     if(999==cnt)
     {
       gpio_set(GPIOC,8);
-      gpio_reset(GPIOC,9);
+      gpio_set(GPIOC,9);
     }
 }
