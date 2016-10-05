@@ -3,6 +3,14 @@
 
 volatile int cnt;
 
+void gpio_set(GPIO_TypeDef * gpio,uint8_t pin)
+{
+  gpio->BSRR=(1<<pin);
+}
+void gpio_reset(GPIO_TypeDef * gpio,uint8_t pin)
+{
+  gpio->BSRR=(1<<(16+pin));
+}
 
 void main(void)
 {
@@ -27,16 +35,6 @@ void main(void)
   debug_exit(0);
 }
 
-void gpio_set(GPIO_TypeDef * gpio,uint8_t pin)
-{
-  gpio->BSRR=(1<<pin);
-}
-void gpio_reset(GPIO_TypeDef * gpio,uint8_t pin)
-{
-  gpio->BSRR=(1<<(16+pin));
-}
-
-
 void SysTick_Handler(void)
 {
     cnt++;
@@ -49,6 +47,5 @@ void SysTick_Handler(void)
     {
       gpio_set(GPIOC,8);
       gpio_reset(GPIOC,9);
-
     }
 }
