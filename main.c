@@ -27,17 +27,14 @@ void main(void)
 
   for(;;) 
   {
-    if(1000==cnt)
-    {
-      cnt=0;
-    }
   }
+  //Will not be reached anyway
   debug_exit(0);
 }
 
 void SysTick_Handler(void)
 {
-    cnt++;
+    cnt=(cnt+1)%1000;
     if(500==cnt)
     {
       gpio_set(GPIOC,9);
