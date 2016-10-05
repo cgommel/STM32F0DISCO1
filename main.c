@@ -3,6 +3,11 @@
 
 volatile int cnt;
 
+uint32_t usr_btn()
+{
+return ((GPIOA->IDR) & 1);
+}
+
 void gpio_set(GPIO_TypeDef * gpio,uint8_t pin)
 {
   gpio->BSRR=(1<<(pin%16));
@@ -34,7 +39,8 @@ void main(void)
 
 void SysTick_Handler(void)
 {
-    cnt=(cnt+1)%1000;
+    if(!usr_btn()) 
+      cnt=(cnt+1)%1000;
     if(500==cnt)
     {
       gpio_set(GPIOC,9);
