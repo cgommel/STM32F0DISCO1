@@ -5,11 +5,11 @@ volatile int cnt;
 
 void gpio_set(GPIO_TypeDef * gpio,uint8_t pin)
 {
-  gpio->BSRR=(1<<pin);
+  gpio->BSRR=(1<<(pin%16));
 }
 void gpio_reset(GPIO_TypeDef * gpio,uint8_t pin)
 {
-  gpio->BSRR=(1<<(16+pin));
+  gpio->BSRR=(1<<(16+(pin%16)));
 }
 
 void main(void)
